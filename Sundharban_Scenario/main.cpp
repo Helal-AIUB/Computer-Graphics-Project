@@ -58,6 +58,20 @@ void drawSundarbanCircle(float cx, float cy, float r, int num_segments) {
     }
     glEnd();
 }
+// snakeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+void drawSundarbanSnake(float baseX, float baseY, float time) {
+    glPushMatrix();
+    glTranslatef(baseX, baseY, 0.0f);
+
+    glColor3f(0.0f, 0.7f, 0.0f);
+
+    for (int i = 0; i < numSegments; i++) {
+        float x = i * segmentLength;  // matha theke dan a
+        float y = waveAmplitude * sin(waveFrequency * i + time);
+
+        drawSundarbanCircle(x, y, bodyRadius, 40);
+    }
 
 // Main
 int main(int argc, char** argv) {
