@@ -414,7 +414,7 @@ void dora(float x1,float x2)
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Moving Plane and Clouds - OpenGL");
+    glutCreateWindow("Moving Plane and Clouds - OpenGL"); //start
 
     glutMainLoop();
     return 0;
