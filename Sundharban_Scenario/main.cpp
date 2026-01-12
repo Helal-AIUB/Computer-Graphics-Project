@@ -223,6 +223,40 @@ void drawSundarbanTree8(float x, float y) {
     }
     glPopMatrix();
 }
+//birdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+const int BIRD_COUNT = 10;
+float birdX[BIRD_COUNT];
+float birdY[BIRD_COUNT];
+
+void initBirds() {
+    for (int i = 0; i < BIRD_COUNT; i++) {
+        birdX[i] = width / 2 + i * 100;
+        birdY[i] = (rand() % 80) + height / 4 + 120;
+    }
+}
+
+
+
+
+//birdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+void drawSundarbanBird(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_LINES);
+        glVertex2f(0, 0);
+        glVertex2f(-10, 10);
+        glVertex2f(0, 0);
+        glVertex2f(10, 10);
+    glEnd();
+    glPopMatrix();
+}
+
+void drawSundarbanAllBirds() {
+    for (int i = 0; i < BIRD_COUNT; i++) {
+        drawSundarbanBird(birdX[i], birdY[i]);
+    }
+}
 
 
 
