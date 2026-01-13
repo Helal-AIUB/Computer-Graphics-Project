@@ -258,7 +258,77 @@ void drawSundarbanAllBirds() {
     }
 }
 
+// round treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+void drawSundarbanRoundLeafTree(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);
 
+    // Trunk
+    glColor3f(0.4f, 0.2f, 0.1f);
+    glBegin(GL_QUADS);
+        glVertex2f(-15, 0);
+        glVertex2f(15, 0);
+        glVertex2f(8, 60);
+        glVertex2f(-8, 60);
+    glEnd();
+
+    // Leaf (circle)
+    glColor3f(0.0f, 0.7f, 0.0f);
+    glBegin(GL_TRIANGLE_FAN);
+        glVertex2f(0, 90);
+        for (int i = 0; i <= 100; i++) {
+            float angle = 2.0f * 3.1416f * i / 100;
+            float dx = 35 * cosf(angle);
+            float dy = 35 * sinf(angle);
+            glVertex2f(dx, dy + 90);
+        }
+    glEnd();
+
+    glPopMatrix();
+}
+
+
+
+// Draw simple tree at (x,y)
+void drawSundarbanSimpleTree(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);
+
+    // Trunk
+    glColor3f(0.36f, 0.25f, 0.20f);
+    glBegin(GL_QUADS);
+        glVertex2f(-30, 0);
+        glVertex2f(5, 0);
+        glVertex2f(10, 60);
+        glVertex2f(-10, 60);
+    glEnd();
+
+    // Leaves - 3 triangles stacked
+    glColor3f(0.0f, 0.6f, 0.0f);
+
+    // Bottom triangle
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-40, 60);
+        glVertex2f(40, 60);
+        glVertex2f(0, 120);
+    glEnd();
+
+    // Middle triangle
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-30, 90);
+        glVertex2f(30, 90);
+        glVertex2f(0, 140);
+    glEnd();
+
+    // Top triangle
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-20, 120);
+        glVertex2f(20, 120);
+        glVertex2f(0, 170);
+    glEnd();
+
+    glPopMatrix();
+}
 
 
 // Main
