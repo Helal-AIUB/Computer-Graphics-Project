@@ -330,7 +330,32 @@ void drawSundarbanSimpleTree(float x, float y) {
     glPopMatrix();
 }
 
+// Function to draw a simple leg
+void drawSundarbanLeg(float x, float y) {
+    glBegin(GL_POLYGON);
+    glVertex2f(x, y);
+    glVertex2f(x + 10, y);
+    glVertex2f(x + 10, y - 30);
+    glVertex2f(x, y - 30);
+    glEnd();
+}
 
+// Function to draw deer antlers
+void drawSundarbanAntlers(float x, float y) {
+    glLineWidth(2);
+    glBegin(GL_LINES);
+    glVertex2f(x, y);
+    glVertex2f(x - 10, y + 30);
+    glVertex2f(x, y);
+    glVertex2f(x + 10, y + 30);
+
+    // branches
+    glVertex2f(x - 5, y + 20);
+    glVertex2f(x - 15, y + 35);
+    glVertex2f(x + 5, y + 20);
+    glVertex2f(x + 15, y + 35);
+    glEnd();
+}
 // Main
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
