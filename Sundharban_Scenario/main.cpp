@@ -710,6 +710,292 @@ void drawSundarbanPalmTree(float x, float y) {
 
 
 
+/ Draw boatttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+void drawSundarbanBoat(float x, float y) {
+glPushMatrix();
+glTranslatef(x, y, 0.0f);
+glColor3f(0.3f, 0.1f, 0.0f);
+glBegin(GL_POLYGON);
+glVertex2f(-70, 0);
+glVertex2f(60, 0);
+glVertex2f(20, -10);
+glVertex2f(-20, -10);
+glEnd();
+glColor3f(1.0f, 0.0f, 1.0f);
+glBegin(GL_QUADS);
+glVertex2f(-25, 0);
+glVertex2f(20, 0);
+glVertex2f(10, 10);
+glVertex2f(-10, 10);
+glEnd();
+glPopMatrix();
+}
+// Draw
+cloudddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+void drawSundarbanCloud(float x, float y) {
+glPushMatrix();
+glTranslatef(x, y, 0.0f);
+glColor3f(1.0f, 1.0f, 1.0f);
+for (int i = 0; i < 3; i++) {
+glBegin(GL_POLYGON);
+for (int j = 0; j < 100; j++) {
+float theta = 2.0f * 3.1416f * j / 100;
+float dx = 30 * cosf(theta);
+float dy = 30 * sinf(theta);
+glVertex2f(dx + i * 30, dy);
+}
+glEnd();
+}
+glPopMatrix();
+}
+// Draw
+sunnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+void drawSundarbanSun() {
+if (isNight) return; // rat hole sun thakbe na
+float sunX = width/2 - 150;
+float sunY = height/2 - 100;
+glColor3f(1.0f, 0.0f, 0.0f);
+glBegin(GL_TRIANGLE_FAN);
+glVertex2f(sunX, sunY);
+for (int i = 0; i <= 100; i++) {
+float angle = 2.0f * 3.1416f * i / 100;
+float x = sunX + cos(angle) * 50;
+float y = sunY + sin(angle) * 50;
+glVertex2f(x, y);
+}
+glEnd();
+glColor3f(1.0f, 0.4f, 0.4f);
+glLineWidth(3);
+glBegin(GL_LINES);
+for (int i = 0; i < 12; i++) {
+float angle = i * 3.1416f / 6;
+float x1 = sunX + cos(angle) * 55;
+float y1 = sunY + sin(angle) * 55;
+float x2 = sunX + cos(angle) * 80;
+float y2 = sunY + sin(angle) * 80;
+glVertex2f(x1, y1);
+glVertex2f(x2, y2);
+}
+glEnd();
+}
+// moon night
+void drawSundarbanMoon() {
+if (!isNight) return;
+float moonX = width/2 - 150;
+float moonY = height/2 - 100;
+glColor3f(1.0f, 1.0f, 0.9f); // light yellowish moon
+glBegin(GL_TRIANGLE_FAN);
+glVertex2f(moonX, moonY);
+for (int i = 0; i <= 100; i++) {
+float angle = 2.0f * 3.1416f * i / 100;
+float x = moonX + cos(angle) * 40;
+float y = moonY + sin(angle) * 40;
+glVertex2f(x, y);
+}
+glEnd();
+}
+//rain
+void drawSundarbanRain() {
+if (!isRain) return;
+glColor3f(0.7f, 0.7f, 1.0f); // bristy color
+glLineWidth(1.5);
+glBegin(GL_LINES);
+for (int i = 0; i < RAIN_DROPS; i++) {
+glVertex2f(rainX[i], rainY[i]);
+glVertex2f(rainX[i], rainY[i] - 10);
+}
+glEnd();
+}
+// Draw coconut
+treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+void drawSundarbanCoconutTree(float x, float y) {
+glPushMatrix();
+glTranslatef(x, y, 0.0f);
+glColor3f(0.36f, 0.25f, 0.20f); // trunk color
+glLineWidth(5);
+glBegin(GL_LINES);
+glVertex2f(0, 0);
+glVertex2f(0, 200); // tall trunk
+glEnd();
+// Leaves
+glColor3f(0.0f, 0.8f, 0.0f);
+glLineWidth(2);
+for (int i = 0; i < 5; i++) {
+float offset = i * 8;
+glBegin(GL_LINES);
+glVertex2f(0, 200);
+glVertex2f(-50 + offset, 240); // left
+glVertex2f(0, 200);
+glVertex2f(50 - offset, 240); // right
+glEnd();
+}
+glPopMatrix();
+}
+void updateBirds() {
+for (int i = 0; i < BIRD_COUNT; i++) {
+birdX[i] -= 2.5;
+if (birdX[i] < -width / 2 - 50) {
+birdX[i] = width / 2 + rand() % 200;
+birdY[i] = (rand() % 80) + height / 4 + 120;
+}
+}
+}
+//
+Display+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void display() {
+glClear(GL_COLOR_BUFFER_BIT);
+drawSundarbanSky();
+drawSundarbanRiver();
+drawSundarbanSoil();
+// Old big trees
+drawSundarbanTree(-300);
+drawSundarbanTree(-100);
+drawSundarbanTree(100);
+drawSundarbanTree(300);
+// Coconut trees
+drawSundarbanCoconutTree(-200, -height / 4 + 60);
+drawSundarbanCoconutTree(200, -height / 4 + 60);
+//snake
+drawSundarbanSnake(snakeX, snakeY, timeValue);
+//Boat
+drawSundarbanBoat(boatX1, -height / 2 + 40);
+drawSundarbanBoat(boatX2, -height / 2 + 60);
+drawSundarbanBoat(boatX3, -height / 2 + 80);
+drawSundarbanBoat(boatX4, -height / 2 + 100);
+// cloud
+drawSundarbanCloud(cloudX1, 360);
+drawSundarbanCloud(cloudX2, 380);
+drawSundarbanCloud(cloudX3, 340);
+// Draw some simple trees
+drawSundarbanSimpleTree(-720, -height / 4 + 60);
+drawSundarbanSimpleTree(720, -height / 4 + 60);
+drawSundarbanSimpleTree(600, -height / 4 + 60);
+drawSundarbanSimpleTree(30, -height / 4 + 60);
+// round tree
+drawSundarbanRoundLeafTree(660, -height / 4 + 60);
+// mango tree
+drawSundarbanMangoTree(-450, -height / 4 + 60);
+drawSundarbanMangoTree(350, -height / 4 + 60);
+//plam tree
+drawSundarbanPalmTree(-550, -height / 4 + 60);
+drawSundarbanPalmTree(450, -height / 4 + 60);
+// mango tree
+drawSundarbanMangrove(-350, -height / 4 + 60);
+drawSundarbanMangrove(-300, -height / 4 + 65);
+//bamboo tree
+drawSundarbanBamboo(-490, -height / 4 + 60);
+drawSundarbanBamboo(380, -height / 4 + 55);
+// tiger
+drawSundarbanTiger(tigerX, -height / 4 + 80);
+// 3 deer side by side
+float deerY = (-height / 4 + 50) + 30;
+drawSundarbanDeer(deerX, deerY); // 1st deer
+drawSundarbanDeer(deerX + 70, deerY); // 2nd deer
+drawSundarbanDeer(deerX + 140, deerY); // 3rd deer
+glutSwapBuffers();
+// nodir dharer tree
+drawSundarbanCoconutTree(-650, -height / 50 -190);
+drawSundarbanSimpleTree(-610, -height / 50 -190);
+drawSundarbanSimpleTree(-420, -height / 50 -190);
+drawSundarbanSimpleTree(510, -height / 50 -190);
+// tree 123456
+drawSundarbanTree1(-170, -150);
+drawSundarbanTree2(-60, -150);
+drawSundarbanTree3(-250, -180);
+drawSundarbanTree3(-270, -180);
+drawSundarbanTree3(250, -180);
+drawSundarbanTree3(270, -180);
+drawSundarbanTree5(60, -190);
+drawSundarbanTree8(420, -190);
+// sun
+drawSundarbanSun();
+drawSundarbanMoon();
+//birds
+drawSundarbanAllBirds();
+//rain
+drawSundarbanRain();
+glFlush();
+}
+//********************************************************************************************************************
+//handlekeypress
+void handleKeypress(unsigned char key, int x, int y) {
+if (key == 'n' || key == 'N') {
+isNight = true;
+}
+if (key == 'd' || key == 'D') {
+isNight = false;
+}
+if (key == 'r' || key == 'R') {
+isRain = !isRain;
+}
+glutPostRedisplay(); // Redraw screen
+}
+//
+Update+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void update(int value) {
+boatX1 -= 2;
+boatX2 -= 1.5;
+boatX3 -= 1.8;
+boatX4 -= 1.2;
+if (boatX1 < -width / 2 - 50) boatX1 = width / 2 + 50;
+if (boatX2 < -width / 2 - 50) boatX2 = width / 2 + 100;
+if (boatX3 < -width / 2 - 50) boatX3 = width / 2 + 150;
+if (boatX4 < -width / 2 - 50) boatX4 = width / 2 + 200;
+// cloud
+cloudX1 -= 1.0;
+cloudX2 -= 0.8;
+cloudX3 -= 0.9;
+if (cloudX1 < -width/2 - 90) cloudX1 = width/2 + 60;
+if (cloudX2 < -width/2 - 90) cloudX2 = width/2 + 100;
+if (cloudX3 < -width/2 - 90) cloudX3 = width/2 + 160;
+//tiger
+tigerX += 2.5;
+if (tigerX > width / 2 + 100) {
+tigerX = -width / 2 - 100;
+}
+deerX += 4.00f;
+// reset when off-screen
+if (deerX > width + 100) deerX = -700;
+//birds
+updateBirds();
+//snake
+snakeX += 3.0f; // bam theke dan jabe
+if (snakeX > width / 4 + 300)
+snakeX = -width / 2 - 300;
+timeValue += 0.3f;
+//rain
+if (isRain) {
+for (int i = 0; i < RAIN_DROPS; i++) {
+rainY[i] -= 5;
+if (rainY[i] < -height/2) {
+rainY[i] = height/2;
+rainX[i] = rand() % width - width/2;
+}
+}
+}
+glutPostRedisplay();
+glutTimerFunc(30, update, 0);
+}
+// Reshape
+void reshape(int w, int h) {
+width = w;
+height = h;
+glViewport(0, 0, w, h);
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(-w/2, w/2, -h/2, h/2, -1, 1);
+glMatrixMode(GL_MODELVIEW);
+}
+//rain
+void initRain() {
+for (int i = 0; i < RAIN_DROPS; i++) 
+{
+rainX[i] = rand() % width - width / 2;
+rainY[i] = rand() % height - height / 2;
+}
+}
+
+
 
 // Main
 int main(int argc, char** argv) {
