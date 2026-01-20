@@ -4286,11 +4286,72 @@ glBegin(GL_POLYGON);
     glFlush();
 }
 
+// Timer for animation
+void update(int value) {
+
+    planeX +=  0.015f;
+    if (planeX > 2.5f)
+    {planeX = -2.5f;}
+
+    cloudOffsetX -= 0.0005f;
+    if (cloudOffsetX < -3.5f)
+    {cloudOffsetX = 3.5f;}
+
+     trainPosX -= 0.02f; // Move train to the right
+
+    if (trainPosX <=- 3.3f)  // Reset position when off-screen right
+        {trainPosX = 3.0f;}
+
+    bus -= 0.01f; // Adjust speed here
+
+    if (bus <-3.5f) { // Reset position when off-screen
+        bus = 3.0f;
+    }
+
+     bus2 += 0.01f;
+    if (bus2 > 2.5f) { // Reset position when off-screen
+        bus2 = -2.5f;
+    }
+
+    cargo -= 0.01f; // Adjust speed here
+
+    if (cargo < -3.5f) { // Reset position when off-screen
+        cargo = 3.0f;
+    }
+
+    glutPostRedisplay(); // Redraw the scene
+    glutTimerFunc(32, update, 0); // Call again after ~16 ms (~60 FPS)
+
+
+}
+void toggleDayNight(unsigned char key, int x, int y) {
+    if (key == 32) {  // Space key to toggle day/night
+        isDay = !isDay;  // Toggle the mode
+        glutPostRedisplay();  // Redraw the scene with the new mode
+    }
+
+    if (key == 'a' || key == 'A') {
+        isYellow = !isYellow; // Toggle color state
+        glutPostRedisplay();  // Redraw the scene
+    }
+     if (key == 's' || key == 'S') {
+
+        changeColor = !changeColor;
+        glutPostRedisplay(); // Redraw the screen
+    }
+
+}
+
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitWindowSize(800, 600);
     glutCreateWindow("Moving Plane and Clouds - OpenGL"); //start
+
     glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    glutKeyboardFunc(toggleDayNight);
+
+    glutTimerFunc(0, update, 0);
 
     glutMainLoop();
     return 0;
