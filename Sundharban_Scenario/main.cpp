@@ -356,6 +356,361 @@ void drawSundarbanAntlers(float x, float y) {
     glVertex2f(x + 15, y + 35);
     glEnd();
 }
+
+
+
+
+// Draw the deerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+void drawSundarbanDeer(float x, float y) {
+    glColor3f(1.0f, 1.6f, 0.f); // green
+
+    // Body
+    glBegin(GL_POLYGON);
+    glVertex2f(x, y);
+    glVertex2f(x + 70, y-5);
+    glVertex2f(x + 60, y + 30);
+    glVertex2f(x, y + 30);
+    glEnd();
+
+    // Legs
+    glColor3f(1.0f, 1.75f, 0.75f);
+    drawSundarbanLeg(x + 5, y);
+    drawSundarbanLeg(x + 20, y);
+    drawSundarbanLeg(x + 35, y);
+    drawSundarbanLeg(x + 50, y);
+
+    // Neck
+    glBegin(GL_POLYGON);
+    glVertex2f(x + 45, y + 30);
+    glVertex2f(x + 55, y + 30);
+    glVertex2f(x + 55, y + 55);
+    glVertex2f(x + 45, y + 55);
+    glEnd();
+
+    // Head
+    glBegin(GL_POLYGON);
+    glVertex2f(x + 40, y + 55);
+    glVertex2f(x + 60, y + 55);
+    glVertex2f(x + 60, y + 65);
+    glVertex2f(x + 40, y + 65);
+    glEnd();
+
+    // Ear
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x + 42, y + 65);
+    glVertex2f(x + 46, y + 70);
+    glVertex2f(x + 44, y + 65);
+    glEnd();
+
+    // Eye
+    glColor3f(0.0, 0.0, 0.0);
+    glPointSize(3);
+    glBegin(GL_POINTS);
+    glVertex2f(x + 58, y + 62);
+    glEnd();
+
+    //tail
+    glColor3f(0.3f, 0.2f, 0.1f); // dark brown tail color
+    glBegin(GL_POLYGON);
+        glVertex2f(x, y + 15);
+        glVertex2f(x - 10, y + 20);
+        glVertex2f(x - 12, y + 18);
+        glVertex2f(x - 5, y + 10);
+    glEnd();
+
+    // Antlers
+    glColor3f(0.3f, 0.2f, 0.1f);
+    drawSundarbanAntlers(x + 50, y + 65);
+}
+
+
+// Tigerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+void drawSundarbanTiger(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+
+    // Body
+    glColor3f(1.0f, 0.6f, 0.0f); // orange
+    glBegin(GL_POLYGON);
+        glVertex2f(-40, 0); glVertex2f(40, 0);
+        glVertex2f(40, 30); glVertex2f(-45, 30);
+    glEnd();
+
+    // Stripes
+    glColor3f(0.0f, 0.0f, 0.0f);
+    for (int i = -30; i <= 30; i += 15) {
+        glBegin(GL_LINES);
+            glVertex2f(i, 0);
+            glVertex2f(i + 10, 30);
+        glEnd();
+    }
+
+    // Head
+    glColor3f(1.0f, 0.6f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(45, 10); glVertex2f(60, 10);
+        glVertex2f(60, 30); glVertex2f(40, 30);
+    glEnd();
+
+    // Eye
+    glColor3f(0, 0, 0);
+    glPointSize(4);
+    glBegin(GL_POINTS);
+        glVertex2f(55, 25);
+    glEnd();
+
+    // Ears
+    glBegin(GL_TRIANGLES);
+        glVertex2f(43, 30); glVertex2f(46, 40); glVertex2f(49, 30); // Left ear
+        glVertex2f(51, 30); glVertex2f(54, 40); glVertex2f(57, 30); // Right ear
+    glEnd();
+
+    // Legs
+    for (int i = -30; i <= 30; i += 20) {
+        glBegin(GL_QUADS);
+            glVertex2f(i, -20);
+             glVertex2f(i + 15, -20);
+            glVertex2f(i + 10, 0);
+             glVertex2f(i, 0);
+
+        glEnd();
+    }
+
+    // Tail
+    glBegin(GL_LINES);
+        glVertex2f(-40, 20);
+        glVertex2f(-60, -10);
+    glEnd();
+
+    glPopMatrix();
+}
+
+
+
+// Draw skyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+void drawSundarbanSky() {
+    glBegin(GL_QUADS);
+        if (isNight)
+            glColor3f(0.0f, 0.0f, 0.2f); // night dark blue
+        else
+            glColor3f(0.53f, 0.81f, 0.98f); // day sky blue
+
+        glVertex2f(-width/2, -height/2);
+        glVertex2f(width/2, -height/2);
+        glVertex2f(width/2, height/2);
+        glVertex2f(-width/2, height/2);
+    glEnd();
+}
+
+
+// Draw riverrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+void drawSundarbanRiver() {
+    glBegin(GL_QUADS);
+        glColor3f(0.0f, 0.4f, 0.8f);
+        glVertex2f(-width/2, -height/2 + 20);
+        glVertex2f(width/2, -height/2 + 20);
+        glVertex2f(width/2, -height/3 + 60);
+        glVertex2f(-width/2, -height/3 + 60);
+    glEnd();
+}
+
+// Draw soilllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+void drawSundarbanSoil() {
+    glBegin(GL_QUADS);
+        glColor3f(0.55f, 0.27f, 0.07f);
+        glVertex2f(-width/2, -height/3 + 60);
+        glVertex2f(width/2, -height/3 + 60);
+        glVertex2f(width/2, -height/4 + 60);
+        glVertex2f(-width/2, -height/4 + 60);
+    glEnd();
+}
+
+// Recursive branch drawingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+void drawSundarbanBranch(float x1, float y1, float angle, float length, float thickness) {
+    float x2 = x1 + length * cos(angle);
+    float y2 = y1 + length * sin(angle);
+
+    glColor3f(0.36f, 0.25f, 0.20f);
+    glLineWidth(thickness);
+    glBegin(GL_LINES);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+    glEnd();
+
+    if (length > 5) {
+        if (length < 20) {
+            glColor3f(0.0f, 0.6f, 0.0f);
+            glPointSize(4);
+            glBegin(GL_POINTS);
+                glVertex2f(x2, y2);
+            glEnd();
+        }
+
+        drawSundarbanBranch(x2, y2, angle - 0.3f, length * 0.7f, thickness * 0.7f);
+        drawSundarbanBranch(x2, y2, angle + 0.3f, length * 0.7f, thickness * 0.7f);
+    }
+}
+
+// Tree 1-4 (recursive)
+void drawSundarbanTree(float xOffset) {
+    glPushMatrix();
+    glTranslatef(xOffset, -height / 4 + 60, 0.0f);
+    drawSundarbanBranch(0, 0, 1.57f, 120, 10);
+    glPopMatrix();
+}
+
+// Draw Mango tree (big, leafy)mangooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+void drawSundarbanMangoTree(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);
+
+    // Trunk
+    glColor3f(0.36f, 0.25f, 0.20f);
+    glLineWidth(7);
+    glBegin(GL_LINES);
+        glVertex2f(0, 0);
+        glVertex2f(0, 150);
+    glEnd();
+
+    // Leaves
+    glColor3f(0.0f, 0.5f, 0.0f);
+    for (int i = 0; i < 5; i++) {
+        float angle = i * 2 * 3.1416f / 5;
+        glBegin(GL_TRIANGLE_FAN);
+            glVertex2f(0, 150); // center top  trunk
+            for (int j = 0; j <= 20; j++) {
+                float theta = j * 3.1416f / 20;
+                float xLeaf = cos(theta) * 40 * (1 - j/20.0f) * 0.8f + cos(angle) * 50;
+                float yLeaf = sin(theta) * 40 * (1 - j/20.0f) * 0.8f + sin(angle) * 50 + 150;
+                glVertex2f(xLeaf, yLeaf);
+            }
+        glEnd();
+    }
+
+    glPopMatrix();
+}
+
+
+//mangroveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+void drawSundarbanMangrove(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+
+    // Trunk
+    glColor3f(0.36f, 0.25f, 0.20f);
+    glLineWidth(6);
+    glBegin(GL_LINES);
+        glVertex2f(0, 0);
+        glVertex2f(0, 70);
+    glEnd();
+
+    // Prop roots
+    glLineWidth(3);
+    for (int i = -3; i <= 3; i++) {
+        if(i == 0) continue;
+        glBegin(GL_LINES);
+            glVertex2f(0, 10);
+            glVertex2f(i * 10, -10);
+        glEnd();
+    }
+
+    // Branches & leaves
+    glColor3f(0.0f, 0.5f, 0.0f);
+    for (int i = 0; i < 3; i++) {
+        glBegin(GL_TRIANGLES);
+            glVertex2f(0, 70 - i*15);
+            glVertex2f(-15, 50 - i*15);
+            glVertex2f(15, 50 - i*15);
+        glEnd();
+    }
+
+    glPopMatrix();
+}
+
+
+
+
+void drawSundarbanBamboo(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+
+    glColor3f(0.0f, 0.6f, 0.1f);
+    glLineWidth(5);
+
+    // Bamboo stalk
+    for (int i = -1; i <= 1; i++) {
+        glBegin(GL_LINES);
+            glVertex2f(i * 7, 0);
+            glVertex2f(i * 7, 80);
+        glEnd();
+
+        // Bamboo nodes
+        glLineWidth(3);
+        for (int j = 0; j < 5; j++) {
+            glBegin(GL_LINES);
+                glVertex2f(i * 7 - 5, j * 15 + 5);
+                glVertex2f(i * 7 + 5, j * 15 + 5);
+            glEnd();
+        }
+        glLineWidth(5);
+    }
+
+    // Leaves
+    glColor3f(0.0f, 0.8f, 0.0f);
+    for (int i = 0; i < 3; i++) {
+        glBegin(GL_POLYGON);
+            glVertex2f(10, 60 + i * 5);
+            glVertex2f(40, 70 + i * 10);
+            glVertex2f(10, 80 + i * 5);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+            glVertex2f(-10, 60 + i * 5);
+            glVertex2f(-40, 70 + i * 10);
+            glVertex2f(-10, 80 + i * 5);
+        glEnd();
+    }
+
+    glPopMatrix();
+}
+
+
+// Draw Palm treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+void drawSundarbanPalmTree(float x, float y) {
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);
+
+    // Trunk
+    glColor3f(0.36f, 0.25f, 0.20f);
+    glLineWidth(6);
+    glBegin(GL_LINES);
+        glVertex2f(0, 0);
+        glVertex2f(0, 200);
+    glEnd();
+
+    // Leaves
+    glColor3f(0.0f, 0.7f, 0.0f);
+    glLineWidth(3);
+    for (int i = 0; i < 5; i++) {
+        float offsetY = 180 + i * 8;
+        float spread = 50 - i * 8;
+        glBegin(GL_LINES);
+            // Left leaf
+            glVertex2f(0, offsetY);
+            glVertex2f(-spread, offsetY + 40);
+
+            // Right leaf
+            glVertex2f(0, offsetY);
+            glVertex2f(spread, offsetY + 40);
+        glEnd();
+    }
+
+    glPopMatrix();
+}
+
+
+
+
 // Main
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
