@@ -721,7 +721,9 @@ int main(int argc, char** argv) {
     glClearColor(1.0, 1.0, 1.0, 1.0);
 
     glutKeyboardFunc(handleKeypress);
+    initRain();
 
+    initBirds();
 
     glutMainLoop();
     return 0;
