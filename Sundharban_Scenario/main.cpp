@@ -710,7 +710,7 @@ void drawSundarbanPalmTree(float x, float y) {
 
 
 
-/ Draw boatttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+//Draw boatttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 void drawSundarbanBoat(float x, float y) {
 glPushMatrix();
 glTranslatef(x, y, 0.0f);
@@ -730,8 +730,7 @@ glVertex2f(-10, 10);
 glEnd();
 glPopMatrix();
 }
-// Draw
-cloudddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+// Draw cloudddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 void drawSundarbanCloud(float x, float y) {
 glPushMatrix();
 glTranslatef(x, y, 0.0f);
@@ -748,8 +747,7 @@ glEnd();
 }
 glPopMatrix();
 }
-// Draw
-sunnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+// Drawsunnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 void drawSundarbanSun() {
 if (isNight) return; // rat hole sun thakbe na
 float sunX = width/2 - 150;
@@ -806,8 +804,7 @@ glVertex2f(rainX[i], rainY[i] - 10);
 }
 glEnd();
 }
-// Draw coconut
-treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+// Draw coconut treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 void drawSundarbanCoconutTree(float x, float y) {
 glPushMatrix();
 glTranslatef(x, y, 0.0f);
@@ -840,8 +837,7 @@ birdY[i] = (rand() % 80) + height / 4 + 120;
 }
 }
 }
-//
-Display+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//Display+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void display() {
 glClear(GL_COLOR_BUFFER_BIT);
 drawSundarbanSky();
@@ -930,8 +926,7 @@ isRain = !isRain;
 }
 glutPostRedisplay(); // Redraw screen
 }
-//
-Update+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//Update+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void update(int value) {
 boatX1 -= 2;
 boatX2 -= 1.5;
@@ -988,7 +983,7 @@ glMatrixMode(GL_MODELVIEW);
 }
 //rain
 void initRain() {
-for (int i = 0; i < RAIN_DROPS; i++) 
+for (int i = 0; i < RAIN_DROPS; i++)
 {
 rainX[i] = rand() % width - width / 2;
 rainY[i] = rand() % height - height / 2;
@@ -1010,6 +1005,11 @@ int main(int argc, char** argv) {
     initRain();
 
     initBirds();
+
+    glutDisplayFunc(display);
+
+    glutReshapeFunc(reshape);
+    glutTimerFunc(0, update, 0);
 
     glutMainLoop();
     return 0;
